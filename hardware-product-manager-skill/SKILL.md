@@ -11,9 +11,9 @@ Support two entry modes:
 
 Guide work from:
 
-Scene Opportunity Discovery → Voice of Customer + Competitive Intelligence → Market opportunity → Product validation → Product definition → PRD → Hardware specification → Cost/BOM → Supplier RFQ → EVT → DVT → PVT → Certification → MP → Launch → Feedback loop.
+Scene Strategy → Scene Opportunity Discovery → Voice of Customer + Competitive Intelligence → Market Opportunity → Product Validation → Product Definition → Scene Requirement Mapping → PRD → Hardware Specification → Cost/BOM → Supplier RFQ → EVT → DVT → PVT → Certification → MP → Launch → Feedback Loop.
 
-Competitive intelligence is a continuous evidence stream across the full lifecycle, not a one-time market-research task.
+Competitive intelligence and scene evidence are continuous evidence streams across the full lifecycle, not one-time research tasks.
 
 The goal is not to produce documents for their own sake.
 
@@ -23,7 +23,7 @@ The goal is to increase the probability of discovering and launching a desirable
 
 Always reason in this order:
 
-Scene → User → Activity → Job → User Voice + Competitive Evidence → Problem → Unmet Need → Opportunity → Product → Competitive Positioning → Specification → Cost → Engineering → Manufacturing → Market → User Feedback + Competitive Change
+Scene → User → Activity → Job → User Voice + Competitive Evidence → Problem → Unmet Need → Opportunity → Product → Competitive Positioning → Scene Requirements → Specification → Cost → Engineering → Manufacturing → Market → User Feedback + Competitive Change + Scene Change
 
 Do not begin with features.
 
@@ -32,6 +32,49 @@ Do not assume the proposed product should be built.
 Do not assume a scene necessarily contains an attractive product opportunity.
 
 Do not assume a user pain point is an opportunity until current competitors, substitutes, and emerging alternatives have been checked.
+
+Do not let marketing language create requirements unsupported by user or competitive evidence.
+
+## Scene Strategy
+
+Use `references/scene-strategy.md` and `references/scene-value-evaluation.md` for important scene-driven decisions.
+
+A meaningful scene should define:
+
+- Market / geography
+- User group
+- Place
+- Timing
+- Trigger
+- Action sequence
+- Frequency
+- Desired outcome
+- Environmental constraints
+- Current solution
+- Friction / failure
+
+When useful, explicitly analyze four scene variables:
+
+- Timing
+- Occasion / Place
+- Action
+- Frequency
+
+Classify scenes as:
+
+- **Core Scene** — primary reason the product should exist
+- **Supporting Scene** — expands usefulness without overriding the core
+- **Lead / Beachhead Scene** — high-sensitivity early-adopter scene
+- **Extreme Scene** — exposes engineering limits and reliability requirements
+- **Reject** — too weak to shape the product
+
+Do not give every scene equal weight.
+
+A practical conceptual model is:
+
+Scene Opportunity = Frequency × Job Importance × Problem Severity × Dissatisfaction × Competitive Gap × Solvability × Economics
+
+Use this as a reasoning framework, not fake mathematical precision.
 
 ## Two Evidence Lines
 
@@ -51,8 +94,6 @@ A practical conceptual model is:
 
 Product Opportunity = User Importance × User Dissatisfaction × Competitive Gap × Solvability × Economics
 
-Use this as a reasoning framework, not fake mathematical precision.
-
 ## Entry Mode Selection
 
 ### Mode A — Opportunity Discovery
@@ -63,7 +104,7 @@ Start with `/scene-opportunity`.
 
 Flow:
 
-`/scene-opportunity` → `/VOC` + `/competitors` → `/discover` → Opportunity Ranking → Top candidates → `/validate`
+`/scene-opportunity` → `/VOC` + `/competitors` → `/discover` → Scene & Opportunity Ranking → Top candidates → `/validate`
 
 ### Mode B — Existing Product Concept
 
@@ -71,7 +112,7 @@ Use when the user already has a concrete product idea.
 
 Flow:
 
-`/VOC` when user problems are unclear + `/competitors` → `/validate` → `/define` → development workflow.
+Scene Definition → `/VOC` when user problems are unclear + `/competitors` → `/validate` → `/define` → Scene Requirement Mapping → `/prd` → development workflow.
 
 If strong VOC or current competitive evidence already exists, reuse it rather than repeating research unnecessarily.
 
@@ -80,7 +121,9 @@ If strong VOC or current competitive evidence already exists, reuse it rather th
 Before major investment, evaluate:
 
 - Desirability
+- Scene Fit
 - Differentiation
+- Competitive Gap
 - Technical feasibility
 - Cost feasibility
 - Margin feasibility
@@ -115,37 +158,43 @@ Never fabricate competitor price, sales, review count, rating, market share, spe
 
 Do not behave as an obedient documentation assistant.
 
-Challenge weak assumptions, conflicting requirements, unrealistic cost targets, unnecessary features, false opportunities, outdated competitive assumptions, and premature tooling or production decisions.
+Challenge weak assumptions, conflicting requirements, unrealistic cost targets, unnecessary features, false opportunities, weak scene evidence, outdated competitive assumptions, and premature tooling or production decisions.
 
 ## Scene Opportunity Workflow
 
 When `/scene-opportunity` is requested:
 
-1. Read `references/scene-opportunity-discovery.md`
-2. Read `references/jobs-to-be-done.md`
-3. Read `references/voice-of-customer.md`
-4. Read `references/competitive-intelligence.md`
-5. Read `references/opportunity-scoring.md`
-6. Define the scene boundary and target market
-7. Map users, activities, triggers, objects, constraints, and journey steps
-8. Identify functional, emotional, and social jobs without prescribing products
-9. Gather or analyze relevant user voices
-10. Map direct competitors, indirect competitors, substitutes, and emerging alternatives
-11. Identify friction, failures, repeated checking, workarounds, and behavioral costs
-12. Determine which problems are already solved well and which remain competitively underserved
-13. Identify unmet needs and opportunity spaces
-14. Generate multiple product concepts for strong opportunity spaces
-15. Rank opportunities using evidence, competitive gap, user value, differentiation, feasibility, economics, and confidence
-16. Surface contradictory evidence and unknowns
-17. Recommend the top 1–3 opportunities for `/validate`
+1. Read `references/scene-strategy.md`
+2. Read `references/scene-value-evaluation.md`
+3. Read `references/scene-opportunity-discovery.md`
+4. Read `references/jobs-to-be-done.md`
+5. Read `references/voice-of-customer.md`
+6. Read `references/competitive-intelligence.md`
+7. Read `references/opportunity-scoring.md`
+8. Define the scene boundary and target market
+9. Map timing, occasion/place, action, frequency, triggers, objects, constraints, and journey steps
+10. Identify functional, emotional, and social jobs without prescribing products
+11. Gather or analyze relevant user voices
+12. Map direct competitors, indirect competitors, substitutes, and emerging alternatives
+13. Identify friction, failures, repeated checking, workarounds, and behavioral costs
+14. Determine which problems are already solved well and which remain competitively underserved
+15. Evaluate scene value and classify scene role
+16. Identify unmet needs and opportunity spaces
+17. Generate multiple product concepts for strong opportunity spaces
+18. Rank opportunities using evidence, competitive gap, user value, differentiation, feasibility, economics, and confidence
+19. Surface contradictory evidence and unknowns
+20. Recommend the top 1–3 opportunities for `/validate`
 
 Use when useful:
 
+- `templates/scene-definition.csv`
 - `templates/scene-map.csv`
+- `templates/scene-value-scorecard.csv`
 - `templates/problem-space.csv`
 - `templates/VOC-raw-data.csv`
 - `templates/VOC-coding.csv`
 - `templates/competitor-landscape.csv`
+- `templates/scene-competitor-benchmark.csv`
 - `templates/opportunity-ranking.csv`
 
 Do not generate a full PRD directly from `/scene-opportunity`.
@@ -162,35 +211,20 @@ When `/competitors` is requested:
 4. Map direct, indirect, substitute, and emerging competitors
 5. Maintain a focused benchmark product set, normally about 5–10 products when possible
 6. Compare positioning, price, specifications, user praise, user complaints, and substitute behavior
-7. Classify major attributes as Category Entry Requirement, Must Match, Must Win, Acceptable Lag, or Irrelevant
-8. Identify competitive gaps that users actually care about
-9. Record evidence source, date, and confidence
-10. Translate findings into implications for opportunity selection, product definition, PRD, benchmark testing, launch, or next-generation planning
+7. Compare competitors inside the same core scene when scene experience matters
+8. Classify major attributes as Category Entry Requirement, Must Match, Must Win, Acceptable Lag, or Irrelevant
+9. Identify competitive gaps that users actually care about
+10. Record evidence source, date, and confidence
+11. Translate findings into implications for opportunity selection, product definition, PRD, benchmark testing, launch, or next-generation planning
 
 Use when useful:
 
 - `templates/competitor-landscape.csv`
 - `templates/competitive-benchmark.csv`
+- `templates/scene-competitor-benchmark.csv`
 - `templates/competitive-change-log.csv`
 
 Refresh competitive intelligence after meaningful competitor launches, protocol changes, target-price changes, before design freeze, before launch, or when market conditions materially change.
-
-## Default Product Workflow
-
-For an early-stage or unfamiliar product concept:
-
-1. Read `references/voice-of-customer.md`
-2. Run `/VOC` when real user problems have not yet been established
-3. Read `references/competitive-intelligence.md`
-4. Run `/competitors` to establish current competitive context
-5. Read `references/product-discovery.md`
-6. Read `references/product-definition.md`
-7. Read `references/cost-and-bom.md`
-8. Read `references/development-gates.md`
-9. Read `references/compliance-and-quality.md`
-10. Use relevant templates from `templates/`
-11. Use stage checklists from `checklists/`
-12. Return a clear Product Gate decision and next actions
 
 ## VOC Workflow
 
@@ -210,12 +244,33 @@ When `/VOC` is requested:
 10. Generate opportunity hypotheses without prematurely defining features
 11. Hand the strongest problems, competitive gaps, and unknowns to `/validate`
 
-Use these templates when useful:
+## Product Definition and Scene Requirement Mapping
 
-- `templates/VOC-raw-data.csv`
-- `templates/VOC-coding.csv`
-- `templates/problem-ranking.csv`
-- `templates/opportunity-backlog.csv`
+During `/define`, `/prd`, and `/spec`:
+
+1. Read `references/product-definition.md`
+2. Read `references/scene-product-design.md`
+3. Confirm Core, Supporting, Lead, and Extreme scenes
+4. Translate validated scenes through:
+
+Scene → Job → Friction / Failure → Desired Outcome → Product Principle → Requirement → Test Method
+
+5. Protect the Core Scene when requirements conflict
+6. Protect Category Entry Requirements and Must-Win attributes
+7. Support secondary scenes only when cost and complexity remain acceptable
+8. Convert vague scene language into measurable requirements
+
+Use `templates/scene-requirement-map.csv` when useful.
+
+Examples:
+
+- Quiet bedroom → acoustic-noise requirement
+- Dark bedroom → indicator-light requirement
+- Travel → size / weight / cable-storage requirements
+- One-hand use → stability / removal-force requirements
+- Outdoor use → ingress / temperature / drop requirements
+
+Do not leave requirements as vague statements such as “bedroom friendly.”
 
 ## Competitive Benchmarking in Development
 
@@ -229,7 +284,30 @@ Maintain the logic:
 - Acceptable Lag — allowed weakness
 - Irrelevant — do not spend cost or complexity here
 
-Before DVT exit, verify that Must-Win claims are demonstrated under comparable test conditions or change the positioning before launch.
+EVT should test whether the architecture can support scene-critical requirements.
+
+DVT should validate the final product in representative Core Scene conditions and compare Must-Win claims against benchmark products under comparable conditions.
+
+Before DVT exit, verify that Must-Win claims are demonstrated or change the positioning before launch.
+
+## Default Product Workflow
+
+For an early-stage or unfamiliar product concept:
+
+1. Define the initial scene using `references/scene-strategy.md`
+2. Run `/VOC` when real user problems have not yet been established
+3. Run `/competitors` to establish current competitive context
+4. Read `references/product-discovery.md`
+5. Run `/validate`
+6. Read `references/product-definition.md`
+7. Read `references/scene-product-design.md`
+8. Run `/define`
+9. Build a Scene Requirement Matrix
+10. Read `references/cost-and-bom.md`
+11. Read `references/development-gates.md`
+12. Read `references/compliance-and-quality.md`
+13. Use relevant templates and stage checklists
+14. Return a clear Product Gate decision and next actions
 
 ## Supported Commands
 
@@ -268,41 +346,44 @@ Before DVT exit, verify that Must-Win claims are demonstrated under comparable t
 For scene-first discovery, return:
 
 1. Scene Definition
-2. User Groups
-3. Scene Journey
-4. Top Jobs-to-be-Done
-5. Existing Solutions / Substitute Behaviors
-6. Competitive Landscape
-7. Friction / Failure Points
-8. Workarounds
-9. VOC Evidence
-10. Problems Already Solved Well by Competitors
-11. Unmet Needs
-12. Competitive Gaps
-13. Opportunity Spaces
-14. Candidate Product Concepts
-15. Opportunity Ranking
-16. Contradictory Evidence
-17. Unknowns
-18. Top 1–3 Opportunities for `/validate`
+2. Scene Role / Value
+3. User Groups
+4. Scene Journey
+5. Top Jobs-to-be-Done
+6. Existing Solutions / Substitute Behaviors
+7. Competitive Landscape
+8. Friction / Failure Points
+9. Workarounds
+10. VOC Evidence
+11. Problems Already Solved Well by Competitors
+12. Unmet Needs
+13. Competitive Gaps
+14. Opportunity Spaces
+15. Candidate Product Concepts
+16. Opportunity Ranking
+17. Contradictory Evidence
+18. Unknowns
+19. Top 1–3 Opportunities for `/validate`
 
 For existing product concepts, default to:
 
 1. Executive Summary
 2. Product Definition
-3. Key Evidence
-4. Competitive Landscape / Benchmark Set
-5. User Pain Points
-6. Competitive Gaps
-7. Opportunity
-8. Recommended Product Specification
-9. Category Entry / Must Match / Must Win / Acceptable Lag
-10. Differentiation
-11. Target Cost
-12. Major Risks
-13. Validation Plan
-14. Product Gate
-15. Next Actions
+3. Core / Supporting / Lead / Extreme Scenes
+4. Key Evidence
+5. Competitive Landscape / Benchmark Set
+6. User Pain Points
+7. Competitive Gaps
+8. Opportunity
+9. Scene Requirement Matrix
+10. Recommended Product Specification
+11. Category Entry / Must Match / Must Win / Acceptable Lag
+12. Differentiation
+13. Target Cost
+14. Major Risks
+15. Validation Plan
+16. Product Gate
+17. Next Actions
 
 ## Repository Usage
 
