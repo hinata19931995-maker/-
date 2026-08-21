@@ -1,225 +1,201 @@
-# 硬件产品经理学习手册
+# 硬件产品经理学习手册（V2）
 
-> 基于本仓库 `hardware-product-manager-skill` 整理
-
-这份文档把仓库中分散的 `SKILL.md`、`references/`、`templates/`、`checklists/` 和示例，整理成一套可以从头学习、也可以直接拿来做项目的中文方法论。
-
----
-
-# 目录
-
-1. 这套 Skill 是做什么的
-2. 核心思维：不要从功能开始
-3. 两种项目入口
-4. 场景机会发现：从场景里找产品
-5. JTBD：把“想要功能”还原成真实任务
-6. VOC：从用户声音中发现真实问题
-7. 产品发现：判断问题是否值得做
-8. 产品验证：GO / CONDITIONAL GO / NO-GO
-9. 产品定义：把机会变成明确产品
-10. PRD：把产品定义变成可执行需求
-11. 成本与 BOM：从售价倒推能不能赚钱
-12. 供应商 RFQ 与供应商选择
-13. 硬件研发阶段：Concept → EVT → DVT → PVT → MP
-14. DFM、DFT、可靠性与 FMEA
-15. 认证与合规
-16. 决策框架：事实、假设、未知和验证
-17. 三个关键 Gate
-18. 命令速查
-19. 推荐学习路径
-20. 一条完整的新品开发流程
+> 基于本仓库 `hardware-product-manager-skill` 整理。
+> 本版新增“场景战略 → 场景价值判断 → 场景驱动产品设计”，只吸收与产品开发直接相关的方法，不把营销文案方法混入产品决策。
 
 ---
 
-# 1. 这套 Skill 是做什么的
+# 一、这套 Skill 是做什么的
 
-这套 Skill 的定位不是“帮你写文档”，而是让 AI 按照一个高级硬件产品经理 + NPI 负责人的方式参与消费电子产品开发。
+这套 Skill 的目标不是帮你“写更多文档”，而是让 AI 按照高级硬件产品经理 + NPI 负责人的方式参与消费电子产品开发。
 
-完整链路是：
+完整链路：
 
-**场景机会发现 → VOC → 市场机会 → 产品验证 → 产品定义 → PRD → 硬件规格 → 成本/BOM → 供应商 RFQ → EVT → DVT → PVT → 认证 → MP → 上市 → 用户反馈闭环**
+**场景战略 → 场景机会发现 → VOC + 竞争情报 → 市场机会 → 产品验证 → 产品定义 → 场景需求映射 → PRD → 硬件规格 → 成本/BOM → 供应商 RFQ → EVT → DVT → PVT → 认证 → MP → 上市 → 用户反馈闭环**
 
-最终目标不是“文件更多”，而是：
+核心目标：
 
-> **提高发现并推出一个用户需要、有差异化、技术可行、成本可行、能量产、符合认证要求并且能赚钱的硬件产品的概率。**
-
-这套方法尤其适合：
-
-- 消费电子
-- Amazon / 电商产品
-- 无线充
-- 鼠标、键盘等电脑外设
-- 蓝牙 / Wi-Fi 产品
-- 音频产品
-- 充电产品
-- 智能家居
-- 电池类产品
-- OEM / ODM 产品开发
+> 提高发现并推出一个用户需要、有差异化、技术可行、成本可行、能量产、符合认证要求并且能赚钱的硬件产品的概率。
 
 ---
 
-# 2. 核心思维：不要从功能开始
+# 二、最重要的主线
 
-整个仓库最重要的一条原则是：
+新版主线是：
 
-**Scene → User → Activity → Job → User Voice → Problem → Demand → Opportunity → Product → Specification → Engineering → Manufacturing → Market**
+**场景 → 用户 → 行为 → JTBD → VOC + 竞争证据 → 问题 → 未满足需求 → 机会 → 产品 → 竞争定位 → 场景需求 → 规格 → 成本 → 工程 → 制造 → 市场 → 用户反馈 + 竞争变化 + 场景变化**
 
-中文可以理解为：
+其中最重要的变化是：
 
-**场景 → 用户 → 行为 → 任务 → 用户声音 → 问题 → 需求 → 机会 → 产品 → 规格 → 工程 → 制造 → 市场**
-
-这意味着：
-
-错误方式：
-
-> 我想做一个 15W 无线充，再加一个 LED，再加提示音，再看看能不能卖。
-
-更好的方式：
-
-> 用户在卧室睡前会做什么？
-> 哪个动作经常失败？
-> 哪些问题让用户反复确认、调整、抱怨或自己想办法解决？
-> 哪些问题值得做成产品？
-> 什么产品才是最简单有效的解决方案？
-
-**产品不是起点，用户任务和问题才是起点。**
+1. 场景不再只是 PRD 里的一个字段。
+2. 场景本身要被研究、分类、验证。
+3. 用户证据和竞争证据必须并行。
+4. 场景必须被翻译成可测量的产品要求。
+5. 市场传播不能反过来制造不存在的产品需求。
 
 ---
 
-# 3. 两种项目入口
-
-本 Skill 有两种入口模式。
+# 三、两个项目入口
 
 ## 模式 A：还不知道做什么产品
 
-适用于：
-
-- 只知道一个场景
-- 只知道一类用户
-- 想寻找新品机会
-
-入口命令：
+从场景出发：
 
 `/scene-opportunity`
 
 流程：
 
-**场景 → 用户活动 → JTBD → VOC → 问题空间 → 机会空间 → 候选产品 → 机会排序 → `/validate`**
+**场景 → 用户活动 → JTBD → VOC + 竞品 → 场景价值判断 → 未满足需求 → Opportunity Space → 候选产品 → 排名 → `/validate`**
 
 例如：
 
-> 市场：美国
-> 场景：家庭卧室床头柜
-> 目标：寻找消费电子产品机会
+> 美国 × 家庭卧室 × 床头
 
-这时候 AI 不应该马上给你列“无线充、闹钟、夜灯、白噪音机”。
+不要立刻脑暴“无线充、闹钟、夜灯”。
 
-它应该先研究：
+先研究：
 
-- 睡前准备
-- 手机和耳机充电
-- 看时间
-- 闹钟
-- 起夜
-- 光线
-- 噪音
-- 收纳
-- 线缆
-- 手机放置
-- 伴侣互相干扰
-
-再从里面寻找真正未满足的任务。
+- 谁在这里
+- 什么时候进入这个场景
+- 做什么动作
+- 多久发生一次
+- 哪些任务最重要
+- 哪些地方反复失败
+- 用户如何 workaround
+- 现有竞品是否已经解决
 
 ## 模式 B：已经有产品想法
 
-适用于：
+例如已经决定研究无线充：
 
-- 已经决定研究无线充
-- 已经有供应商方案
-- 已经看到某个市场机会
-
-流程：
-
-**`/VOC`（必要时）→ `/validate` → `/define` → `/prd` → 后续开发流程**
-
-如果已有充分 VOC 数据，不必重复研究。
+**场景定义 → `/VOC` + `/competitors` → `/validate` → `/define` → 场景需求映射 → `/prd` → `/spec` → 后续开发**
 
 ---
 
-# 4. 场景机会发现：从场景里找产品
+# 四、场景不是一个词，而是一组变量
 
-文件：`references/scene-opportunity-discovery.md`
+场景定义至少包含：
 
-场景机会发现不是随机脑暴产品，而是寻找：
-
-- 未完成的任务
-- 反复出现的摩擦
-- 高严重度失败
-- 用户自己创造的 workaround
-- 多步骤但本可简化的行为
-- 多个产品拼在一起才能完成的任务
-- 兼容性问题
-- 光、噪音、热、尺寸、线缆、充电、收纳等场景问题
-
-## 场景边界要先定义
-
-至少明确：
-
-- 国家 / 市场
-- 物理位置
-- 时间段
+- 市场 / 国家
 - 用户群
-- 触发事件
-- 前、中、后行为
-- 场景里已有的物品和设备
-- 环境限制
+- 地点
+- 时间 / 时机
+- Trigger 触发点
+- 行为顺序
+- 频次
+- 期望结果
+- 环境约束
+- 当前解决方案
+- 摩擦 / 失败
 
-例如“家庭”太宽。
+其中建议重点看四个变量：
 
-“美国城市家庭，晚上 10 点到早上 7 点，卧室床头柜”就更适合研究。
+## 1. 时机 Timing
 
-## 场景地图要回答 9 个问题
+需求什么时候被激活？
 
-1. 谁在这里？
-2. 他想完成什么？
-3. 行为顺序是什么？
-4. 现在用什么产品解决？
-5. 哪里发生摩擦？
-6. 哪里会失败？
-7. 用户反复检查、调整、携带、记忆、整理、充电或避免什么？
-8. 用户有什么 workaround？
-9. 哪些任务仍没有被很好解决？
+例如：
 
-## 特别强的机会信号
+> 睡觉前 5 分钟，而不是“全天”。
 
-比“用户说不喜欢”更值得关注的是：
+## 2. 场合 Occasion / Place
 
-- 反复重新摆放
-- 反复确认
-- 自己贴胶带
-- 自己增加转接头
-- 自己加垫片
-- 自己改装
-- 为一个简单任务买多个产品
-- 为部分解决方案支付高价
+用户在哪里、周围环境如何？
 
-用户愿意付出时间、金钱或行为成本，通常说明问题更真实。
+例如卧室意味着：
+
+- 黑暗
+- 安静
+- 伴侣可能已睡
+- 用户不愿做复杂操作
+
+## 3. 动作 Action
+
+用户实际在做什么？
+
+例如：
+
+> 拿手机 → 放到充电器 → 看屏幕确认 → 熄灯 → 睡觉。
+
+## 4. 频次 Frequency
+
+每天、每周、偶尔还是一年一次？
+
+频率会直接影响产品机会大小和购买价值。
 
 ---
 
-# 5. JTBD：把“想要功能”还原成真实任务
+# 五、场景也要分级
 
-文件：`references/jobs-to-be-done.md`
+不是每个场景都应该进入产品定义。
 
-JTBD 的标准句式：
+## Core Scene 核心场景
 
-> **当……的时候，我想要……，这样我就可以……。**
+产品最应该解决的场景，也是“为什么这个产品应该存在”的主要答案。
 
-英文形式：
+例如卧室无线充的核心场景可能是：
 
-> When [situation], I want to [motivation/action], so I can [desired outcome].
+> 睡前把手机放下，不需要反复确认，第二天可靠有电。
 
-## 不要把产品写成 Job
+## Supporting Scene 支撑场景
+
+能扩展使用价值，但不能破坏核心产品。
+
+例如：
+
+> 白天放在家庭书桌临时补电。
+
+## Lead / Beachhead Scene 引线 / 滩头场景
+
+一群对问题特别敏感、特别容易成为首批用户的人。
+
+它适合帮助找到初始目标用户，但不能自动代表整个大众市场。
+
+## Extreme Scene 极限场景
+
+用来暴露工程极限。
+
+例如：
+
+- 高温环境
+- 厚手机壳
+- 极端角度
+- 高频插拔
+
+极限场景更适合产生可靠性和工程要求，而不是直接决定大众产品功能。
+
+## Reject
+
+场景真实存在，但频率低、价值弱、竞争已经解决或成本不值得，因此不让它影响产品。
+
+---
+
+# 六、如何判断一个场景值不值得做
+
+新版 Skill 使用概念模型：
+
+**Scene Opportunity = Frequency × Job Importance × Problem Severity × Dissatisfaction × Competitive Gap × Solvability × Economics**
+
+不需要硬凑一个精确数字；信息不足时用 High / Medium / Low / Unknown。
+
+重点问：
+
+- 需求会不会稳定出现？
+- 用户动作是否重复？
+- 失败是否真的烦、贵、危险或影响结果？
+- 当前方案是否明显不好？
+- 用户有没有自己花时间或钱 workaround？
+- 竞品在这个具体场景里是否仍有明显缺口？
+- 我们是否能低复杂度解决？
+- 市场规模和商业模式是否支持？
+
+---
+
+# 七、JTBD：不要把产品写成任务
+
+标准句式：
+
+> 当……的时候，我想要……，这样我就可以……。
 
 错误：
 
@@ -227,1117 +203,683 @@ JTBD 的标准句式：
 
 正确：
 
-> 当我睡前把手机放下时，我希望手机能自动正确开始充电，不需要仔细对位，这样我可以不用反复确认就直接睡觉。
+> 当我睡前把手机放下时，我想让它不用仔细对位就能可靠开始充电，这样我不用反复确认就可以直接睡觉。
 
-后者才是用户任务。
-
-## 三类 Job
-
-### Functional Job
-
-用户实际上要完成什么。
-
-例如：
-
-- 晚上把手机充满
-- 确认第二天闹钟能工作
-
-### Emotional Job
-
-用户希望有什么感觉。
-
-例如：
-
-- 安心
-- 不被打扰
-- 不焦虑
-
-### Social Job
-
-用户希望别人怎么看自己。
-
-普通消费电子通常优先研究 Functional Job，除非情绪或身份明显影响购买。
-
-## 一个强机会的典型特征
-
-**重要性高 + 当前满意度低 + 发生频繁 + 现有方案弱**
+一个好的 Job 描述解决的是用户目标，不预设具体技术方案。
 
 ---
 
-# 6. VOC：从用户声音中发现真实问题
+# 八、VOC：从真实声音里找问题
 
-文件：`references/voice-of-customer.md`
+VOC 流程：
 
-VOC（Voice of Customer）不是“把评论总结一下”。
+**Raw Voice → Context → Problem Code → Problem Cluster → Frequency → Severity → Current Solution → Workaround → Root-Cause Hypothesis → Opportunity → Validation**
 
-正确流程是：
+主要来源：
 
-**原始用户声音 → 场景 → 问题编码 → 问题聚类 → 频率 → 严重度 → 当前方案 → workaround → 根因假设 → 产品机会 → 验证**
+- Amazon / 电商评论
+- Q&A
+- Reddit / 论坛
+- 客服
+- 退款 / 退货
+- 用户访谈
+- 观察真实使用
+- 已有产品数据
 
-## VOC 数据可以来自哪里
+证据等级：
 
-1. Amazon 等电商评论
-2. 产品 Q&A
-3. Reddit / 论坛 / 社区
-4. 客服工单
-5. 退款和退货原因
-6. 用户访谈
-7. 直接观察用户使用
-8. 已有产品使用数据
+- `[DATA]`：真实用户声音
+- `[PATTERN]`：多个独立来源重复
+- `[HYPOTHESIS]`：推测出的根因或底层需求
+- `[VALIDATED]`：被进一步验证
 
-不要只依赖一种来源。
-
-## 新消费电子的推荐 VOC 流程
-
-1. 选择 10–20 个直接或间接竞品
-2. 收集足够广泛的用户声音
-3. 保留原始文字和上下文
-4. 对每条问题编码
-5. 合并同义问题
-6. 区分“症状”和“根因”
-7. 有完整数据时统计频率
-8. 找用户 workaround
-9. 排名用户问题
-10. 转成机会假设
-11. 对高影响假设进一步验证
-
-## 不要把功能需求直接当答案
-
-用户说：
-
-> 我希望 LED 有关闭按钮。
-
-真正的问题可能是：
-
-> 夜间持续亮灯影响睡眠。
-
-可能的解决方案有：
-
-- 自动熄灯
-- 自动调暗
-- 环境光感应
-- 无常亮 LED
-- 手动关闭
-
-**用户提出的是方案，不一定是最佳方案。**
-
-## 症状 ≠ 根因
-
-例如：
-
-> “充不上电”
-
-可能来自：
-
-- 对位错误
-- 手机壳干扰
-- 协议不支持
-- 适配器功率不足
-- 过热保护
-- 硬件故障
-
-因此根因必须标记为 `[HYPOTHESIS]`，直到有证据验证。
-
-## VOC 证据等级
-
-- `[DATA]`：直接观察到的用户声音
-- `[PATTERN]`：多个独立用户/来源重复出现
-- `[HYPOTHESIS]`：推测出的底层需求或根因
-- `[VALIDATED]`：通过进一步数据、访谈或测试确认
-
-AI 的推断永远不能自动等同于“用户已验证需求”。
+不能把 AI 的推理直接叫“已验证需求”。
 
 ---
 
-# 7. 产品发现：判断问题是否值得做
+# 九、竞争对手必须贯穿全周期
 
-文件：`references/product-discovery.md`
+用户证据回答：
 
-产品发现阶段研究：
+> 用户哪里不满意？
 
-- 目标市场
-- 国家
-- 用户
-- 使用场景
-- 现有替代方案
-- 痛点
-- 市场成熟度
-- 价格带
-- 竞争强度
-- 市场空白
+竞争证据回答：
 
-## 场景描述公式
+> 这个问题现在市场已经解决到什么程度？
 
-**Person + Place + Time + Task + Problem**
+因此：
 
-即：
+**用户有痛点 ≠ 有产品机会。**
 
-**什么人 + 在哪里 + 什么时间 + 做什么 + 遇到什么问题**
+真正的机会更接近：
 
-同时区分：
+**User Importance × User Dissatisfaction × Competitive Gap × Solvability × Economics**
 
-- 核心场景
-- 次要场景
-- 边缘场景
+竞品要覆盖：
 
-## 痛点优先级
+- 直接竞品
+- 间接竞品
+- 替代行为
+- 新兴方案
 
-可以分为：
-
-- P0：关键问题
-- P1：重要问题
-- P2：锦上添花
-
-判断维度：
-
-- 发生频率
-- 严重度
-- 现有方案
-- 现有方案质量
-- 支付意愿
-- 产品机会
-
-## 竞争不是只看“同类产品”
-
-至少看四层：
-
-1. 直接竞品
-2. 间接竞品
-3. 替代行为
-4. 新兴替代技术
-
-例如无线充的替代方案不只是另一个无线充，还包括：
-
-- USB-C 线充
-- MagSafe / Qi2
-- 多口充电器
-- 床头带电源的家具
+维护一个 5–10 款左右的 Benchmark Set，并持续更新。
 
 ---
 
-# 8. 产品验证：GO / CONDITIONAL GO / NO-GO
+# 十、不要只做规格表，要做“场景竞品 Benchmark”
 
-文件：`SKILL.md`、`references/product-definition.md`
+普通竞品表：
 
-一个产品不能因为“看起来不错”就进入开发。
+> A 15W、B 15W、C 25W。
 
-必须至少判断七个方面：
+场景 Benchmark：
 
-1. Desirability：用户真的想要吗？
-2. Differentiation：为什么用户会选你？
-3. Technical Feasibility：技术做得到吗？
-4. Cost Feasibility：成本做得到吗？
-5. Margin Feasibility：能赚钱吗？
-6. Manufacturing Feasibility：工厂能稳定量产吗？
-7. Certification Feasibility：目标市场能合法销售吗？
+> 在同一个卧室睡前场景里，谁更容易对位？谁更安静？谁的灯最不打扰？谁最稳定？谁能单手取放？
 
-最后给出三种结果之一：
+可以比较：
 
-### GO
+- Task Success
+- 操作步骤
+- 完成时间
+- Reliability
+- Noise
+- Heat
+- LED / Visibility
+- Placement Tolerance
+- Compatibility
+- One-hand Interaction
+- Occupied Space
 
-证据足够，可以进入下一阶段。
-
-### CONDITIONAL GO
-
-方向有希望，但必须先验证某些关键假设。
-
-### NO-GO
-
-当前产品定义不值得继续。
-
-**Skill 明确规定：不能默认给 GO。**
+真正的竞争差异不是“多一个功能”，而是在用户重要场景中产生更好的结果。
 
 ---
 
-# 9. 产品定义：把机会变成明确产品
+# 十一、产品机会怎么判断
 
-文件：`references/product-definition.md`
+先判断问题机会，再判断产品机会。
 
-## 产品定位公式
+## Level 1：Problem Opportunity
 
-> 对于 [目标用户]，当他们遇到 [需求/问题] 时，[产品] 是一个 [产品类别]，能够提供 [主要价值]；相比 [替代方案]，它的主要差异是 [核心差异化]。
+看：
 
-好的定位应该不需要工程术语也能听懂。
-
-## 产品定义最少要明确
-
-- 产品名称
-- 产品类别
-- 目标用户
-- 目标市场
-- 核心场景
-- 目标零售价
-- 目标 Landed Cost
-- 目标 BOM
-- 毛利目标
-- 销售渠道
-
-## 核心价值不要太多
-
-最好不超过 3 个。
-
-回答：
-
-> **为什么这个产品应该存在？**
-
-## 功能优先级
-
-- MUST：没有就不能成功
-- SHOULD：重要竞争能力
-- COULD：可有可无
-- WON'T：本代明确不做
-
-每一个功能都必须能回答：
-
-**用户问题 → 用户价值 → 商业价值**
-
-否则就要警惕 Feature Creep（功能膨胀）。
-
----
-
-# 10. PRD：把产品定义变成可执行需求
-
-文件：`templates/PRD-template.md`
-
-仓库中的 PRD 模板包含 26 部分：
-
-1. 产品背景
-2. 市场机会
-3. 目标用户
-4. 使用场景
-5. 用户痛点
-6. 产品定位
-7. 产品目标
-8. Non-Goals
-9. 功能需求
-10. 性能需求
-11. UX 需求
-12. 工业设计需求
-13. 电气需求
-14. 固件需求
-15. 机械需求
-16. 兼容性需求
-17. 可靠性需求
-18. 安全需求
-19. 认证需求
-20. 包装需求
-21. 成本需求
-22. 制造需求
-23. 质量需求
-24. 上市需求
-25. 风险
-26. Open Questions
-
-## 写需求最重要的原则
-
-不要写：
-
-> 续航好。
-
-应该写：
-
-> 在定义的典型使用模型下，续航不少于 30 天。
-
-也就是说：
-
-**需求必须尽可能可测量。**
-
-产品经理主要定义 WHAT（需要达到什么）。
-
-工程主要决定 HOW（怎么实现）。
-
----
-
-# 11. 成本与 BOM：从售价倒推能不能赚钱
-
-文件：`references/cost-and-bom.md`
-
-硬件产品一个非常关键的原则是：
-
-> **不要先把产品做出来，再看卖多少钱。**
-
-应该从目标零售价倒推。
-
-## 成本倒推逻辑
-
-目标零售价
-
-减去：
-
-- 税
-- 平台佣金
-- FBA / Fulfillment
-- 广告预算
-- 退货损耗
-- 保修
-- 包装
-- 关税
-- 物流
-- 目标利润
-
-得到：
-
-**Maximum Acceptable Landed Cost**
-
-再继续倒推：
-
-- Target Ex-Factory Cost
-- Target BOM
-
-如果目标成本明显不成立，要在开发前就停止或调整产品。
-
-## 初步 BOM 常见模块
-
-- PCB
-- MCU / SoC
-- Power
-- RF
-- Battery
-- Mechanical
-- UI
-- Accessories
-- Packaging
-
-特别重要：
-
-**Estimated BOM ≠ Supplier Quoted BOM**
-
-估算成本和供应商正式报价必须分开。
-
----
-
-# 12. 供应商 RFQ 与供应商选择
-
-文件：`templates/RFQ-template.md`、`references/cost-and-bom.md`
-
-## RFQ 至少要求供应商回复
-
-- MOQ
-- 样品费
-- 工程费
-- 模具费
-- 1K / 5K / 10K / 50K 单价
-- 包装成本
-- Lead Time
-- 是否有现成平台
-- 可定制内容
-- 已有认证
-- 付款条件
-- 保修支持
-
-还要问清楚：
-
-- 模具归谁
-- 固件归谁
-- 测试治具归谁
-- IP 是否有限制
-
-## 供应商不能只比价格
-
-仓库建议默认权重：
-
-- 技术能力 20%
-- 产品质量 20%
-- 成本 15%
-- 工程支持 15%
-- 产能 10%
-- 质量体系 10%
-- 沟通 5%
-- 交付 5%
-
-同时检查：
-
-- 单一供应商风险
-- 关键物料风险
-- 模具所有权
-- 固件所有权
-- 测试治具所有权
-
----
-
-# 13. 硬件研发阶段：Concept → EVT → DVT → PVT → MP
-
-文件：`references/development-gates.md`
-
-完整架构：
-
-**Concept → Feasibility → Prototype → EVT → DVT → PVT → MP**
-
-核心原则：
-
-> **样机能用，不等于可以量产。**
-
-## EVT：Engineering Validation Test
-
-目标：
-
-> 验证工程架构是否真正工作。
-
-重点验证：
-
-- 电子
-- PCB
-- Firmware
-- 机械架构
-- Thermal
-- RF
-- Power
-- Charging
-- 核心功能
-
-典型退出条件：
-
-> 没有未解决的 P0 工程问题。
-
-## DVT：Design Validation Test
-
-目标：
-
-> 验证最终设计是否满足 PRD。
-
-包括：
-
-- 功能性能
-- 可靠性
-- 跌落
-- 温度
-- 湿度
-- 电池
-- 充电
-- RF
-- 兼容性
-- 材料
-- 机械寿命
-- UX
-- 包装
-- 认证
-
-## PVT：Production Validation Test
-
-目标：
-
-> 验证工厂能不能稳定生产。
-
-重点：
-
-- 生产线
-- 治具
-- SOP
-- 作业指导书
-- Cycle Time
-- Yield
-- Calibration
-- Firmware 烧录
-- SN
-- Traceability
-- 包装
-- QC
-
-核心指标：
-
-- FPY（First Pass Yield）
-- Production Yield
-
-## MP：Mass Production
-
-只有产品、工程、质量、供应链、认证和成本都达到要求，才能进入 MP。
-
----
-
-# 14. DFM、DFT、可靠性与 FMEA
-
-文件：`references/compliance-and-quality.md`
-
-## DFM：Design for Manufacturing
-
-机械重点：
-
-- 壁厚
-- 拔模角
-- 倒扣
-- 卡扣
-- 螺丝数量
-- 装配方向
-- 外观面
-
-电子重点：
-
-- PCB 拼板
-- 测试点
-- 元器件间距
-- SMT 风险
-- 接口位置
-
-一个非常实际的问题：
-
-> 能不能少一个装配步骤？
-
-少一步通常意味着：
-
-- 成本更低
-- 时间更短
-- 出错概率更低
-
-## DFT：Design for Test
-
-量产测试可能包括：
-
-- 开机
-- 电流
-- 电压
-- RF
-- Bluetooth
-- Wi-Fi
-- Charging
-- Battery
-- Button
-- LED
-- Sensor
-- Audio
-- Firmware Version
-
-## 可靠性
-
-按产品情况考虑：
-
-- 跌落
-- 振动
-- 温度
-- 热循环
-- 湿度
-- USB 插拔
-- 按键寿命
-- 开关寿命
-- 充电循环
-- 电池老化
-- 线材弯折
-- 表面磨损
-
-## FMEA
-
-至少记录：
-
-- Failure Mode
-- Effect
+- Frequency
 - Severity
-- Occurrence
-- Detection
-- Risk
-
-对于关键问题：
-
-**Root Cause → Containment → Corrective Action → Preventive Action**
-
-不要只修表面症状。
-
----
-
-# 15. 认证与合规
-
-文件：`references/compliance-and-quality.md`
-
-认证不能最后才考虑。
-
-判断方式：
-
-**Product + Technology + Battery + Market**
-
-## 美国可能涉及
-
-- FCC
-- UL / ETL（适用时）
-- DOE（适用时）
-
-## 欧盟可能涉及
-
-- CE
-- RED
-- EMC
-- LVD
-- RoHS
-- REACH
-- WEEE
-
-## 日本可能涉及
-
-- TELEC / GITEKI
-- PSE（适用时）
-
-## 电池相关
-
-- UN38.3
-- IEC 62133（适用时）
-
-## 无线充
-
-- Qi / Qi2（适用时）
-
-最终认证要求必须由有资质的实验室或合规专业人士确认。
-
----
-
-# 16. 决策框架：事实、假设、未知和验证
-
-文件：`references/decision-framework.md`
-
-面对重要产品决策，用下面六步：
-
-## 1. Evidence
-
-我们确定知道什么？
-
-## 2. Assumption
-
-我们正在假设什么？
-
-## 3. Unknown
-
-还有什么不知道？
-
-## 4. Risk
-
-如果假设错了，会损失什么？
-
-## 5. Validation
-
-怎样用最低成本验证？
-
-## 6. Decision
-
-现在应该做什么？
-
-## Assumption Register
-
-把假设分成：
-
-- Confirmed
-- Partially Validated
-- Unvalidated
-
-优先验证：
-
-**高不确定性 × 高影响**
-
-## Cost of Change 原则
-
-开发阶段越往后，改错成本越高。
-
-所以每进入下一阶段前都问：
-
-> **有什么问题如果现在发现很便宜，但以后发现会非常贵？**
-
-推荐验证顺序：
-
-**Research → Existing Data → User Interview → Competitive Analysis → Supplier Confirmation → Prototype → Engineering Test → Tooling → Production**
-
----
-
-# 17. 三个关键 Gate
-
-仓库里有三个非常重要的 Checklist。
-
-## Gate 1：Concept Gate
-
-进入正式开发前至少确认：
-
-- 目标用户已定义
-- 核心场景已定义
-- 核心 JTBD 已定义
-- P0 痛点已识别
-- 已理解现有替代方案
-- 已找到竞争空白
-- 已确定目标价格
-- 已粗略验证成本可行性
-- 已识别主要技术风险
-- 已大致确认认证路径
-- 已给出 Product Gate 决策
-
-## Gate 2：Design Freeze
-
-冻结设计前确认：
-
-- 核心需求已验证
-- 主要 DVT 问题已解决
-- 成本可接受
-- 模具风险可接受
-- 认证路径已确认
-- 供应商准备好
-- 关键元器件已锁定
-- Open Changes 已评审
-
-## Gate 3：MP Readiness
-
-量产前确认：
-
-- PRD Passed
-- DVT Passed
-- Critical Defects Closed
-- PVT Passed
-- Yield 达标
-- QC Plan 已批准
-- 关键物料可供应
-- 必要认证已取得
-- 成本达标
-- 包装已验证
-- Traceability 已验证
-
-最后输出：
-
-- `MP READY`
-- `MP NOT READY`
-
----
-
-# 18. 命令速查
-
-## 机会发现阶段
-
-### `/scene-opportunity`
-
-从一个场景寻找产品机会。
-
-### `/VOC`
-
-系统研究用户声音和真实问题。
-
-### `/discover`
-
-研究市场、用户、痛点、竞品和机会空间。
-
-### `/competitors`
-
-做竞品分析。
-
-### `/reviews`
-
-做聚焦式评论研究。
-
-### `/validate`
-
-判断一个具体产品是否值得继续。
-
-## 产品定义与开发
-
-### `/define`
-
-生成产品定义。
-
-### `/prd`
-
-生成 PRD。
-
-### `/spec`
-
-生成硬件规格。
-
-### `/cost`
-
-做售价倒推与成本模型。
-
-### `/bom`
-
-创建初步 BOM。
-
-### `/rfq`
-
-准备供应商询价资料。
-
-### `/supplier`
-
-比较和评估供应商。
-
-### `/evt`
-
-建立 EVT 计划。
-
-### `/dvt`
-
-建立 DVT 测试矩阵。
-
-### `/pvt`
-
-建立 PVT 试产计划。
-
-### `/dfm`
-
-做可制造性 Review。
-
-### `/fmea`
-
-做失效模式风险分析。
-
-### `/cert`
-
-分析认证路径。
-
-### `/risk`
-
-建立风险清单。
-
-### `/mp`
-
-判断是否达到量产条件。
-
-### `/launch`
-
-准备上市。
-
-### `/feedback`
-
-把上市后的评论、退货、售后反馈重新转成产品输入。
-
-### `/next`
-
-当你不知道下一步做什么时，让 Skill 根据当前项目阶段给出优先动作。
-
----
-
-# 19. 推荐学习路径
-
-如果你把这套 Skill 当作一门“硬件产品开发课程”，建议按下面顺序学习。
-
-## 第一阶段：先学会发现问题
-
-重点阅读：
-
-1. `scene-opportunity-discovery.md`
-2. `jobs-to-be-done.md`
-3. `voice-of-customer.md`
-4. `product-discovery.md`
-
-目标：
-
-> 不再从“我想做什么产品”出发，而是从“用户在哪个场景里有什么任务没有被很好完成”出发。
-
-## 第二阶段：学会做产品决策
-
-重点阅读：
-
-1. `opportunity-scoring.md`
-2. `product-definition.md`
-3. `decision-framework.md`
-4. `concept-gate.md`
-
-目标：
-
-> 学会说 GO，也学会说 NO-GO。
-
-## 第三阶段：学会把产品做成商业项目
-
-重点阅读：
-
-1. `PRD-template.md`
-2. `cost-and-bom.md`
-3. `RFQ-template.md`
-4. Supplier Scorecard
-
-目标：
-
-> 把产品价值、规格、成本和供应商能力连起来。
-
-## 第四阶段：学会真正把硬件量产出来
-
-重点阅读：
-
-1. `development-gates.md`
-2. EVT / DVT / PVT 模板
-3. `compliance-and-quality.md`
-4. FMEA
-5. Design Freeze Checklist
-6. MP Readiness Checklist
-
-目标：
-
-> 理解“有样机”和“能量产”之间巨大的差别。
-
----
-
-# 20. 一条完整的新品开发流程
-
-如果今天从 0 开始寻找一个消费电子产品，可以这样跑：
-
-## Step 1：选择场景
-
-例如：
-
-> 美国 × 家庭卧室 × 床头柜
-
-运行：
-
-`/scene-opportunity`
-
-输出：
-
-- 用户
-- 行为
-- JTBD
-- 摩擦
-- workaround
-- 产品机会池
-
-## Step 2：研究 VOC
-
-运行：
-
-`/VOC`
-
-输出：
-
-- Raw VOC
-- Problem Coding
-- Problem Clusters
-- Top Problems
+- Importance
+- Current Satisfaction
+- Workaround
+- WTP Signal
 - Evidence Strength
 
-## Step 3：机会排序
+## Level 2：Product Opportunity
 
-判断：
+看：
 
-- 用户价值
-- 差异化
-- 技术可行性
-- 成本可行性
-- 经济性
-- 证据强度
+- User Value
+- Differentiation
+- Technical Feasibility
+- Cost Feasibility
+- Margin Potential
+- Manufacturing Feasibility
+- Compliance Feasibility
+- Channel Fit
+- Competitive Defensibility
 
-取 Top 1–3。
+最终 Top 1–3 再进入 `/validate`。
 
-## Step 4：产品验证
+---
 
-运行：
+# 十二、Product Gate
 
-`/validate`
+重大投入前至少判断：
 
-得到：
+- Desirability
+- Scene Fit
+- Differentiation
+- Competitive Gap
+- Technical Feasibility
+- Cost Feasibility
+- Margin Feasibility
+- Manufacturing Feasibility
+- Certification Feasibility
+
+结论只能是：
 
 - GO
 - CONDITIONAL GO
 - NO-GO
 
-## Step 5：产品定义
+不能默认 GO。
 
-运行：
+---
+
+# 十三、产品定义
+
+产品定义至少明确：
+
+- 产品类别
+- 目标用户
+- 目标市场
+- Core Scene
+- Supporting Scene
+- Lead Scene
+- Target Price
+- Target Landed Cost
+- Target BOM
+- Launch Channel
+- 核心价值（不超过 3 个）
+
+功能优先级：
+
+- MUST
+- SHOULD
+- COULD
+- WON'T
+
+每一个功能必须回答：
+
+**用户问题 → 用户价值 → 商业价值**
+
+---
+
+# 十四、新增核心方法：Scene Requirement Mapping
+
+这是新版最重要的产品开发桥梁之一。
+
+不能从：
+
+> 场景 = 卧室
+
+直接跳到：
+
+> 所以做一个夜间模式。
+
+正确转换链是：
+
+**Scene → Job → Friction / Failure → Desired Outcome → Product Principle → Requirement → Test Method**
+
+例如：
+
+**Scene**：黑暗卧室睡前充电
+
+↓
+
+**Job**：放下手机后直接睡觉
+
+↓
+
+**Friction**：持续亮灯影响睡眠
+
+↓
+
+**Desired Outcome**：确认充电后环境恢复黑暗
+
+↓
+
+**Product Principle**：仅在必要时提供状态反馈
+
+↓
+
+**Requirement**：开始充电后状态灯在定义时间内自动熄灭
+
+↓
+
+**Test Method**：DVT 夜间指示灯行为测试
+
+这样，场景才真正进入工程开发。
+
+---
+
+# 十五、场景如何变成硬件规格
+
+示例：
+
+- 安静卧室 → Acoustic Noise Requirement
+- 黑暗卧室 → LED Brightness / Timeout Requirement
+- Travel → Size / Weight / Cable Storage
+- One-hand Use → Base Stability / Removal Force
+- Outdoor → IP / Temperature / Drop
+- 睡前操作 → Steps / Confirmation Time / Alignment Tolerance
+
+不要在 PRD 里留下“适合卧室”“操作方便”“高级感好”这种无法验收的表述。
+
+必须转换成可验证的行为或指标。
+
+---
+
+# 十六、发生规格冲突时，优先保护什么
+
+顺序：
+
+1. Core Scene
+2. Category Entry Requirement
+3. Must-Win
+4. Must-Match
+5. Supporting Scene
+6. Nice-to-have
+
+不要为了让所有场景都能用，最后做出一个每个场景都不够好的产品。
+
+---
+
+# 十七、PRD
+
+PRD 应覆盖：
+
+- 背景
+- 市场机会
+- 用户
+- 场景
+- 痛点
+- 定位
+- Goals / Non-Goals
+- Functional Requirements
+- Performance
+- UX
+- ID
+- Electrical
+- Firmware
+- Mechanical
+- Compatibility
+- Reliability
+- Safety
+- Certification
+- Packaging
+- Cost
+- Manufacturing
+- Quality
+- Launch
+- Risk
+- Open Questions
+
+新增建议：
+
+> 重要项目附一张 `Scene Requirement Matrix`。
+
+---
+
+# 十八、竞争属性分类
+
+每个关键规格不要只问“竞品有没有”，而要分类：
+
+## Category Entry Requirement
+
+没有就会被市场淘汰。
+
+## Must Match
+
+至少达到主流水平。
+
+## Must Win
+
+这是本产品明确要赢的地方。
+
+## Acceptable Lag
+
+可以弱一点，不影响购买理由。
+
+## Irrelevant
+
+用户不在意，不要浪费成本。
+
+这能有效抑制 Feature Creep。
+
+---
+
+# 十九、成本与 BOM
+
+从售价倒推，而不是先把东西做出来。
+
+Retail Price
+
+减去：
+
+- 税
+- 平台费
+- Fulfillment
+- 广告
+- 退货
+- 保修
+- 包装
+- Duty
+- Logistics
+- Target Profit
+
+得到：
+
+**Maximum Acceptable Landed Cost**
+
+再倒推：
+
+- Target Ex-Factory Cost
+- Target BOM
+
+必须区分：
+
+**Estimated BOM ≠ Supplier Quoted BOM**
+
+---
+
+# 二十、供应商与 RFQ
+
+RFQ 至少问：
+
+- MOQ
+- Sample Cost
+- Engineering Fee
+- Tooling
+- 1K / 5K / 10K / 50K Price
+- Packaging
+- Lead Time
+- Existing Platform
+- Customization
+- Certification Status
+- Payment Terms
+
+并确认：
+
+- Tooling Ownership
+- Firmware Ownership
+- Fixture Ownership
+- IP Restriction
+
+供应商评价不能只看价格。
+
+---
+
+# 二十一、EVT / DVT / PVT 如何加入场景
+
+## EVT
+
+问：
+
+> 工程架构能不能支持 Core Scene 的关键要求？
+
+例如卧室充电：
+
+- 散热方案是否会产生噪音？
+- LED 能否按需求控制？
+- 对位结构是否稳定？
+
+## DVT
+
+问：
+
+> 最终设计在代表性 Core Scene 中是否真正达到要求？
+
+不仅测实验室参数，还应做场景化测试。
+
+并且 Must-Win 必须与 Benchmark Product 在相近条件下比较。
+
+## PVT
+
+问：
+
+> 工厂能否稳定生产出持续满足这些场景关键要求的产品？
+
+例如：
+
+- 每批磁力一致性
+- LED 亮度一致性
+- 风扇 / 噪音一致性
+- 充电性能一致性
+
+---
+
+# 二十二、Design Freeze 之前
+
+至少确认：
+
+- Core Scene 已验证
+- 场景关键需求已写入 PRD
+- Must-Win 有测试证据
+- Major DVT Issue 已解决
+- 成本可接受
+- Tooling Risk 可接受
+- Certification Path 已确认
+- Supplier Ready
+- Critical Components 已锁定
+
+如果 Core Scene 还没有验证，不应该因为进度压力就 Freeze。
+
+---
+
+# 二十三、认证与质量
+
+认证按：
+
+**Product + Technology + Battery + Market**
+
+考虑：
+
+- FCC
+- UL / ETL（适用时）
+- CE / RED / EMC / LVD
+- RoHS / REACH / WEEE
+- TELEC / GITEKI
+- PSE
+- UN38.3
+- IEC 62133
+- Qi / Qi2
+
+最终要求应由实验室或合规专业人士确认。
+
+质量方面继续使用：
+
+- DFM
+- DFT
+- Reliability
+- FMEA
+
+---
+
+# 二十四、决策框架
+
+重大决策都问：
+
+## Evidence
+
+知道什么？
+
+## Assumption
+
+假设什么？
+
+## Unknown
+
+不知道什么？
+
+## Risk
+
+错了损失什么？
+
+## Validation
+
+如何便宜地验证？
+
+## Decision
+
+现在应该做什么？
+
+优先验证：
+
+**High Uncertainty × High Impact**
+
+并始终遵守：
+
+> 越晚发现错误，硬件修改成本越高。
+
+---
+
+# 二十五、推荐命令顺序
+
+## 不知道做什么产品
+
+`/scene-opportunity`
+
+↓
+
+`/VOC + /competitors`
+
+↓
+
+`/discover`
+
+↓
+
+机会排序
+
+↓
+
+`/validate`
+
+## 已经有产品
+
+场景定义
+
+↓
+
+`/VOC + /competitors`
+
+↓
+
+`/validate`
+
+↓
 
 `/define`
 
-确定：
+↓
 
-- 用户
-- 场景
-- 价值
-- 价格
-- 核心规格
-- MUST / SHOULD / COULD / WON'T
+Scene Requirement Matrix
 
-## Step 6：写 PRD 和规格
+↓
 
-运行：
+`/prd + /spec`
 
-- `/prd`
-- `/spec`
+↓
 
-## Step 7：成本与供应商
+`/cost + /bom`
 
-运行：
+↓
 
-- `/cost`
-- `/bom`
-- `/rfq`
-- `/supplier`
+`/rfq + /supplier`
 
-## Step 8：开发验证
+↓
 
-按顺序：
+EVT → DVT → PVT → MP
 
-**Prototype → EVT → DVT → Design Freeze → PVT**
+↓
 
-## Step 9：量产判断
-
-运行：
-
-`/mp`
-
-只有所有 Blocker 关闭，才进入 MP。
-
-## Step 10：上市反馈闭环
-
-运行：
-
-- `/launch`
-- `/feedback`
-
-把：
-
-**评论 → 退货 → 售后 → 故障 → 用户 workaround**
-
-重新进入 VOC。
-
-这样就形成：
-
-**市场 → 产品 → 开发 → 量产 → 上市 → 用户反馈 → 下一代产品**
+`/feedback`
 
 ---
 
-# 最后记住 6 句话
+# 二十六、一个无线充例子
+
+场景：
+
+> 美国家庭卧室，用户睡前把手机放到床头充电。
+
+不要直接定义：
+
+> 15W、LED、提示音。
+
+先拆：
+
+**Timing**：睡前
+
+**Place**：黑暗安静的卧室
+
+**Action**：放手机 → 确认 → 睡觉
+
+**Frequency**：每天
+
+**Job**：第二天可靠有电
+
+**Friction**：对位、灯光、噪音、发热、掉充
+
+然后用 VOC 确认哪些是真问题，再看竞品有没有解决。
+
+如果最后发现：
+
+- 磁吸对位已经是市场标配
+- 夜间灯光仍有用户 workaround
+- 高功率产品出现噪音/热问题
+
+那么产品机会就不应该是：
+
+> “再做一个 15W 无线充。”
+
+而可能是：
+
+> **针对卧室 Core Scene 优化的 Reliable + Dark + Silent Charging。**
+
+然后再把这个价值拆成可测试规格。
+
+---
+
+# 二十七、最后记住 9 句话
 
 1. **不要从功能开始，从场景和 Job 开始。**
-2. **用户说的功能，不一定是用户真正的问题。**
-3. **有痛点，不等于有产品机会。**
-4. **有样机，不等于能量产。**
-5. **能做出来，不等于能赚钱。**
-6. **越晚发现错误，硬件项目付出的成本越高。**
-
-如果把这六句话真正用到每一个新品项目里，这套 Skill 才真正发挥价值。
+2. **场景不是一个地点，而是时机、场合、动作、频次和约束的组合。**
+3. **不是每个场景都值得进入产品定义。**
+4. **用户有痛点，不等于市场有机会。**
+5. **VOC 与竞争证据必须一起看。**
+6. **场景必须最终翻译成可测试的 Requirement。**
+7. **核心场景优先于功能堆叠。**
+8. **有样机不等于能量产；能量产不等于能赚钱。**
+9. **越晚发现错误，硬件项目付出的成本越高。**
 
 ---
 
-# 仓库文件与本手册对应关系
+# 新版重点文件
 
-## 核心入口
+## 场景方法
 
-- `SKILL.md`
-- `README.md`
-
-## 方法论
-
+- `references/scene-strategy.md`
+- `references/scene-value-evaluation.md`
 - `references/scene-opportunity-discovery.md`
+- `references/scene-product-design.md`
 - `references/jobs-to-be-done.md`
+
+## 用户与竞争证据
+
 - `references/voice-of-customer.md`
+- `references/competitive-intelligence.md`
+- `references/competitive-benchmarking.md`
 - `references/opportunity-scoring.md`
+
+## 产品开发
+
 - `references/product-discovery.md`
 - `references/product-definition.md`
-- `references/decision-framework.md`
 - `references/cost-and-bom.md`
 - `references/development-gates.md`
 - `references/compliance-and-quality.md`
+- `references/decision-framework.md`
 
-## 常用模板
+## 新增场景模板
 
+- `templates/scene-definition.csv`
+- `templates/scene-value-scorecard.csv`
+- `templates/scene-competitor-benchmark.csv`
+- `templates/scene-requirement-map.csv`
+
+## 其他关键模板
+
+- `templates/VOC-raw-data.csv`
+- `templates/VOC-coding.csv`
+- `templates/problem-ranking.csv`
+- `templates/opportunity-ranking.csv`
+- `templates/competitive-benchmark.csv`
 - `templates/PRD-template.md`
-- `templates/product-definition-template.md`
+- `templates/BOM-template.csv`
 - `templates/RFQ-template.md`
 - `templates/EVT-template.md`
 - `templates/DVT-template.md`
 - `templates/PVT-template.md`
-- `templates/BOM-template.csv`
 - `templates/FMEA-template.csv`
-- `templates/risk-register-template.csv`
-- `templates/supplier-scorecard-template.csv`
-- `templates/change-log-template.csv`
-- `templates/VOC-raw-data.csv`
-- `templates/VOC-coding.csv`
-- `templates/problem-ranking.csv`
-- `templates/opportunity-backlog.csv`
-- `templates/scene-map.csv`
-- `templates/problem-space.csv`
-- `templates/opportunity-ranking.csv`
-
-## Gate Checklist
-
-- `checklists/concept-gate.md`
-- `checklists/design-freeze.md`
-- `checklists/mp-readiness.md`
 
 ---
 
-**建议使用方式：先通读本手册建立整体框架，再回到对应 reference 和 template 练习具体项目。**
+**建议学习顺序：先学 Scene Strategy → JTBD → VOC → Competitive Intelligence → Opportunity → Product Definition → Scene Requirement Mapping，再学习成本、供应商和 EVT/DVT/PVT。**
